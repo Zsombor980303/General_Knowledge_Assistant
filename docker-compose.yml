@@ -1,0 +1,30 @@
+services:
+  assistant-api:
+    build: .
+    container_name: enterprise-knowledge-assistant
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    # Felülírja a .env relatív útvonalait, hogy a konténeren belüli /app könyvtárakra
+    # és az alább csatolt Docker volume-okra mutassanak.
+    environment:
+      - CHROMA_PERSIST_DIR=/app/chroma_db
+      - DATA_DIR=/app/data
+    volumes:
+      # A data mappa csak olvasható (read-only) csatolása a host gépről: új dokumentumok
+      # hozzáadásakor újraépítés nélkül, egy egyszerű konténer-újraindítással betöltődnek.
+      - ./data:/app/data:ro
+      # A ChromaDB adatai külön tartós Docker volume-ba kerülnek, hogy újraindításkor ne vesszenek el.
+      - chroma_data:/app/chroma_db
+    healthcheck:
+      # A Docker 30 másodpercenként pingeli a /health végpontot az alkalmazás állapotának ellenőrzésére.
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    restart: unless-stopped
+
+volumes:
+  chroma_data:

@@ -1,0 +1,5 @@
+[tool.pytest.ini_options]
+markers = [
+    "live: Valódi külső AI szolgáltatót (Gemini vagy Ollama) igénylő integrációs próba",
+]
+addopts = "-m 'not live'"

@@ -1,0 +1,21 @@
+# Környezeti változók és titkos API kulcsok (SOHA ne kerüljön fel GitHubra!)
+.env
+
+# Python virtuális környezet és cache fájlok
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+
+# Lokális ChromaDB vektoradatbázis fájlok
+chroma_db/
+
+# IDE beállítások (PyCharm / VS Code)
+.idea/
+.vscode/
+
+# OS fájlok
+.DS_Store
+Thumbs.db
