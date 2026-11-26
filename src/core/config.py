@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     embedding_provider: Literal["gemini", "ollama"] = "gemini"
 
     gemini_api_key: str = ""
-    gemini_llm_model: str = "gemini-2.5-flash"
+    gemini_llm_model: str = "gemini-3.8-flash"
     gemini_embedding_model: str = "gemini-embedding-001"
 
     ollama_base_url: str = "http://localhost:11434"
