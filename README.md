@@ -117,7 +117,7 @@ cp .env.example .env
 | `GEMINI_API_KEY` | — | Google Gemini API-kulcs (`gemini` mód esetén kötelező) |
 | `GEMINI_LLM_MODEL` | `gemini-3.8-flash` | Használt Gemini nyelvi modell |
 | `GEMINI_EMBEDDING_MODEL` | `gemini-embedding-001` | Használt Gemini embedding modell |
-| `OLLAMA_BASE_URL` | `http://localhost:11434` | Ollama szerver címe (Dockerből: `http://docker.internal`) |
+| `OLLAMA_BASE_URL` | `http://localhost:11434` | Ollama szerver címe (Dockerből: `http://host.docker.internal:11434`) |
 | `OLLAMA_LLM_MODEL` | `llama3.2` | Lokális Ollama nyelvi modell |
 | `OLLAMA_EMBEDDING_MODEL` | `nomic-embed-text` | Lokális Ollama embedding modell |
 | `CHROMA_PERSIST_DIR` | `./chroma_db` | ChromaDB perzisztens tárolási könyvtára |
@@ -154,7 +154,7 @@ A teljes RAG-folyamat (mind a dokumentumok/kérdések vektorizálása, mind a v�
      ollama pull nomic-embed-text
      ```
 2. **Konfiguráció módosítása (kódmódosítás nélkül):**
-   * Írd át a `.env` fájlt erre (ha az alkalmazás Dockerben fut, az `OLLAMA_BASE_URL` értéke `http://docker.internal` legyen):
+   * Írd át a `.env` fájlt erre (ha az alkalmazás Dockerben fut, az `OLLAMA_BASE_URL` értéke `http://host.docker.internal:11434` legyen):
      ```env
      LLM_PROVIDER=ollama
      EMBEDDING_PROVIDER=ollama
