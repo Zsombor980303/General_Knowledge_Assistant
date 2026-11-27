@@ -129,6 +129,21 @@ cp .env.example .env
 | `LLM_TIMEOUT_SECONDS` | `30` | LLM-hívás időkorlátja másodpercben |
 
 ### A) Elsődleges mód: Google Gemini (felhős LLM és embedding)
+* **Modellválasztás indoklása:** A `gemini-3.8-flash` gyors válaszidőt, alacsony költséget és megbízható magyar nyelvű kontextuskövetést biztosít alacsony hőmérsékleten (`temperature=0.0`), míg a `gemini-embedding-001` pontos szemantikus visszakeresést nyújt.
+
+1. Állítsd be a `.env` fájlban:
+   ```env
+   LLM_PROVIDER=gemini
+   EMBEDDING_PROVIDER=gemini
+   GEMINI_API_KEY=sajat_api_kulcsod
+   GEMINI_LLM_MODEL=gemini-3.8-flash
+   GEMINI_EMBEDDING_MODEL=gemini-embedding-001
+   ```
+2. Indítás **Docker Compose** segítségével:
+   ```bash
+   docker compose up --build
+   ```
+   *(Vagy lokális Python virtuális környezetben: `pip install -r requirements.lock.txt` majd `uvicorn src.main:app --host 0.0.0.0 --port 8000`)*
 ### B) Ingyenes lokális alternatíva: Ollama (fizetős API-kulcs nélkül)
 A teljes RAG-folyamat (mind a dokumentumok/kérdések vektorizálása, mind a válaszgenerálás) futtatható teljesen lokálisan **Ollama** segítségével.
 
